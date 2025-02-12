@@ -1,0 +1,18 @@
+
+class Solution:
+    def maximumSum(self, nums: List[int]) -> int:
+        def digit_sum(n):
+            return sum(int(d) for d in str(n))
+        sum_map = defaultdict(list)
+        max_sum = -1
+
+        for num in nums:
+            s = digit_sum(num)
+            sum_map[s].append(num)
+
+        for key in sum_map:
+            if len(sum_map[key]) > 1:
+                sum_map[key].sort(reverse=True)
+                max_sum = max(max_sum, sum_map[key][0] + sum_map[key][1])
+
+        return max_sum
